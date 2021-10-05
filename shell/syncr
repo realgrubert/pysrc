@@ -1,0 +1,23 @@
+#!/bin/bash
+# synchronize mirror
+M1=terran
+M2=terram
+
+if ! ( mount 2>/dev/null | grep $M1); then
+    echo "${M1} not mounted"
+    exit;
+fi
+if ! ( mount 2>/dev/null | grep $M2 ); then
+    echo "${M2} not mounted"
+    exit;
+fi
+
+if [ "$1" == "" ]; then
+  echo "usage sin <folder relative to ${M1}/>" 
+  echo "folders"
+  ls -l /mnt/${M1}
+  exit
+fi
+rsync -r --delete -v /mnt/${M1}/${1}/ /mnt/${M2}/${1}/
+
+

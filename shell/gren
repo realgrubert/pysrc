@@ -1,0 +1,15 @@
+#!/bin/bash
+if [ $# -lt 2 ] 
+then
+    echo "usage: gren MATCH_REGEXP REPLACE_WITH"
+    echo "Replace match in all filenames"
+    exit 0;
+fi
+IFS='
+'
+for i in `ls *${1}*`
+    do
+    echo $i
+    mv $i  `echo $i | sed "s/${1}/${2}/g" `
+done
+
